@@ -113,7 +113,7 @@ module.exports = async function handler(req, res) {
                                 <tr>
                                     <td style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center;">
                                         <p class="small-text" style="margin: 0 0 8px 0; color: #6c757d; font-size: 14px; line-height: 1.5;">Este mensaje fue enviado desde el formulario de contacto de tu sitio web.</p>
-                                        <p class="small-text" style="margin: 0; color: #6c757d; font-size: 14px; line-height: 1.5; font-weight: 500;">Fecha: ${new Date().toLocaleString('es-ES')}</p>
+                                        <p class="small-text" style="margin: 0; color: #6c757d; font-size: 14px; line-height: 1.5; font-weight: 500;">Fecha: ${new Date().toLocaleString('es-UY', { timeZone: 'America/Montevideo' })}</p>
                                     </td>
                                 </tr>
                             </table>
@@ -135,7 +135,7 @@ Email: ${email}
 Mensaje:
 ${message}
 
-Fecha: ${new Date().toLocaleString('es-ES')}
+Fecha: ${new Date().toLocaleString('es-UY', { timeZone: 'America/Montevideo' })}
       `
     };
 
