@@ -1,0 +1,23 @@
+{
+  "name": "resend-contact-form",
+  "version": "1.0.0",
+  "description": "Formulario de contacto simple con Resend y Vercel Functions",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server . -p 3000",
+    "build": "echo 'Build completed - archivos estáticos listos para desplegar'",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "resend",
+    "vercel",
+    "contact-form",
+    "serverless",
+    "javascript"
+  ],
+  "author": "alexcuadroo",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "14.1.1"
+  }
+}
