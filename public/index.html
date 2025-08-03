@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Contacto</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-color: #3b82f6;
+        --primary-dark: #1d4ed8;
+        --secondary-color: #003d00;
+        --background-color: #f8fafc;
+        --surface-color: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --border-color: #e2e8f0;
+        --shadow-color: rgba(0, 0, 0, 0.1);
+        --success-bg: #dcfce7;
+        --success-text: #166534;
+        --success-border: #bbf7d0;
+        --error-bg: #fef2f2;
+        --error-text: #dc2626;
+        --error-border: #fecaca;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --primary-color: #1e3a8a;
+          --primary-dark: #1e40af;
+          --secondary-color: #581c87;
+          --background-color: #0f172a;
+          --surface-color: #1e293b;
+          --text-primary: #f1f5f9;
+          --text-secondary: #cbd5e1;
+          --border-color: #334155;
+          --shadow-color: rgba(0, 0, 0, 0.3);
+          --success-bg: #022c22;
+          --success-text: #6ee7b7;
+          --success-border: #065f46;
+          --error-bg: #2d1b1b;
+          --error-text: #fca5a5;
+          --error-border: #991b1b;
+        }
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 0%,
+          var(--secondary-color) 100%
+        );
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        transition: background 0.3s ease;
+      }
+
+      .container {
+        background: var(--surface-color);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 15px 35px var(--shadow-color);
+        width: 100%;
+        max-width: 500px;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--text-primary);
+        margin-bottom: 30px;
+        font-size: 2rem;
+        transition: color 0.3s ease;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--text-secondary);
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s ease, background-color 0.3s ease,
+          color 0.3s ease;
+        font-family: inherit;
+        background-color: var(--surface-color);
+        color: var(--text-primary);
+      }
+
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .btn {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 0%,
+          var(--secondary-color) 100%
+        );
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        width: 100%;
+        transition: transform 0.2s ease, box-shadow 0.2s ease,
+          background 0.3s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px var(--shadow-color);
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark) 0%,
+          var(--primary-color) 100%
+        );
+      }
+
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .message {
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: 500;
+      }
+
+      .success {
+        background-color: var(--success-bg);
+        color: var(--success-text);
+        border: 1px solid var(--success-border);
+      }
+
+      .error {
+        background-color: var(--error-bg);
+        color: var(--error-text);
+        border: 1px solid var(--error-border);
+      }
+
+      .loading {
+        display: none;
+        text-align: center;
+        margin-top: 20px;
+      }
+      .loading p {
+        color: var(--text-secondary);
+      }
+
+      .spinner {
+        border: 3px solid var(--border-color);
+        border-top: 3px solid var(--primary-color);
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 25px;
+          margin: 10px;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Contáctame</h1>
+
+      <div id="message" class="message" style="display: none"></div>
+
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Nombre *</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo electrónico *</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Mensaje *</label>
+          <textarea
+            id="messageText"
+            name="message"
+            placeholder="Escribe tu mensaje aquí... (max. 500 caracteres)"
+            maxlength="500"
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn" id="submitBtn">Enviar Mensaje</button>
+      </form>
+
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Enviando mensaje...</p>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const submitBtn = document.getElementById("submitBtn");
+          const loading = document.getElementById("loading");
+          const messageDiv = document.getElementById("message");
+          const form = document.getElementById("contactForm");
+
+          const formData = {
+            name: document.getElementById("name").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            message: document.getElementById("messageText").value.trim(),
+          };
+
+          if (!formData.name || !formData.email || !formData.message) {
+            showMessage("Por favor, completa todos los campos.", "error");
+            return;
+          }
+
+          submitBtn.disabled = true;
+          loading.style.display = "block";
+          messageDiv.style.display = "none";
+
+          try {
+            const response = await fetch("/api/send-contact", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+              showMessage(
+                "¡Mensaje enviado exitosamente! Te contactaremos pronto.",
+                "success"
+              );
+              form.reset();
+            } else {
+              showMessage(
+                result.error ||
+                  "Error al enviar el mensaje. Intenta nuevamente.",
+                "error"
+              );
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            showMessage(
+              "Error de conexión. Verifica tu internet e intenta nuevamente.",
+              "error"
+            );
+          } finally {
+            submitBtn.disabled = false;
+            loading.style.display = "none";
+          }
+        });
+
+      function showMessage(text, type) {
+        const messageDiv = document.getElementById("message");
+        messageDiv.textContent = text;
+        messageDiv.className = `message ${type}`;
+        messageDiv.style.display = "block";
+
+        if (type === "success") {
+          setTimeout(() => {
+            messageDiv.style.display = "none";
+          }, 5000);
+        }
+      }
+    </script>
+  </body>
+</html>
